@@ -6,7 +6,8 @@
   "dependencies": {
     "node-dweetio": "^0.0.11",
     "nova-sds011": "^0.0.2",
-    "serialport": "^4.0.7"
+    "serialport": "^4.0.7",
+    "espress": "^4.15.2"
   },
   "devDependencies": {},
   "scripts": {
