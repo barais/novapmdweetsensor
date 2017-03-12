@@ -4,6 +4,13 @@ var serial = new serialport.SerialPort("/dev/ttyUSB0", {
     baudrate: 9600
 });
 var dweetClient = require("node-dweetio");
+
+var express = require('express');
+var app = express();
+
+var fs = require('fs');
+
+
 var dweetio = new dweetClient();
 
 const delay = 300000;
@@ -41,6 +48,12 @@ serial.on('data', function (data) {
       	dweetio.dweet_for("pm10thorigneFouillardsainteanne", {some:pmValues.pm10}, function(err, dweet){
       	});
         console.info("pm2.5: " + pmValues.pm2_5 + "\tpm10: " + pmValues.pm10);
+        fs.appendFile("static/data.csv", ""+pmValues.pm2_5 +";"+pmValues.pm10+"\n", function(err) {
+            if(err) {
+                return console.log(err);
+            }
+        });
+
   }
   }
 });
@@ -65,7 +78,7 @@ setInterval(function(){
   setTimeout(function(){
     sensorSleep();
     i=0;
-  },delaybeforeSleep);
+    },delaybeforeSleep);
 },delay);
 
 dweetio.listen_for("pm25thorignefouillardsainteanne", function(dweet){
@@ -75,4 +88,10 @@ dweetio.listen_for("pm25thorignefouillardsainteanne", function(dweet){
 
 dweetio.listen_for("pm10thorigneFouillardsainteanne", function(dweet){
 	console.log(dweet);
+});
+
+app.use(express.static('static'));
+
+app.listen(3000, function () {
+  console.log('Dust Sensor listening on port 3000!');
 });
