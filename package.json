@@ -1,0 +1,32 @@
+{
+  "name": "novapmdweet",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "node-dweetio": "^0.0.11",
+    "nova-sds011": "^0.0.2",
+    "serialport": "^4.0.7"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/barais/novapmdweetsensor.git"
+  },
+  "keywords": [
+    "nova",
+    "pm",
+    "dust",
+    "sensor",
+    "dweet"
+  ],
+  "author": "Olivier Barais",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/barais/novapmdweetsensor/issues"
+  },
+  "homepage": "https://github.com/barais/novapmdweetsensor#readme"
+}
