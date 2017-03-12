@@ -6,6 +6,8 @@ var serial = new serialport.SerialPort("/dev/ttyUSB0", {
 var dweetClient = require("node-dweetio");
 
 var express = require('express');
+var dateTime = require('node-datetime');
+
 var app = express();
 
 var fs = require('fs');
@@ -48,7 +50,10 @@ serial.on('data', function (data) {
       	dweetio.dweet_for("pm10thorigneFouillardsainteanne", {some:pmValues.pm10}, function(err, dweet){
       	});
         console.info("pm2.5: " + pmValues.pm2_5 + "\tpm10: " + pmValues.pm10);
-        fs.appendFile("static/data.csv", ""+pmValues.pm2_5 +";"+pmValues.pm10+"\n", function(err) {
+        var dt = dateTime.create();
+        var formatted = dt.format('d-m-Y;H:M:S');
+
+        fs.appendFile("static/data.csv", ""+pmValues.pm2_5 +";"+pmValues.pm10+";"+ formatted+"\n", function(err) {
             if(err) {
                 return console.log(err);
             }
